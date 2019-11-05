@@ -8,6 +8,10 @@ public class Calcolatrice {
 	}
 	
 	public static int differenza (int a , int b) {
-		return a-b;
+		if(a>b) {
+			return a-b;
+		}
+		System.out.println("Attenzione "+a+" minore di "+b);
+		return -1;
 	}
 }
