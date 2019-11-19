@@ -37,6 +37,7 @@ public class ProductsListingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ProductListingServlet In");
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product("vestito amazon", "vestito", 100));
 		products.add(new Product("iphone 11 pro", "smartphone", 1000));
@@ -44,6 +45,7 @@ public class ProductsListingServlet extends HttpServlet {
 		products.add(new Product("Omega", "orologi", 3000));
 		request.setAttribute("productsList", products);
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/productsList.jsp");
+		System.out.println("ProductListingServlet Out");
 		dispatcher.forward(request, response);
 	}
 

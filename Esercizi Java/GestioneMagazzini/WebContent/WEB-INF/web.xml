@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>GestioneMagazzini</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>ProductsListingServlet</servlet-name>
-  	<servlet-class>com.nttdata.talentcamp.magazzino.servlets.ProductsListingServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>ProductsListingServlet</servlet-name>
-  	<url-pattern>/lista-prodotti</url-pattern>
-  </servlet-mapping>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>GestioneMagazzini</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>ProductsListingServlet</servlet-name>
+		<servlet-class>com.nttdata.talentcamp.magazzino.servlets.ProductsListingServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ProductsListingServlet</servlet-name>
+		<url-pattern>/auth/lista-prodotti</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.nttdata.talentcamp.magazzino.servlets.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+
+	<filter>
+		<filter-name>LoggingFilter</filter-name> <!-- mandatory -->
+		<filter-class>com.nttdata.talentcamp.magazzino.filters.LoggingFilter</filter-class> <!-- mandatory -->
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LoggingFilter</filter-name> <!-- mandatory -->
+		<url-pattern>/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+	</filter-mapping>
+	
+	
+	<filter>
+		<filter-name>AuthFilter</filter-name> <!-- mandatory -->
+		<filter-class>com.nttdata.talentcamp.magazzino.filters.AuthFilter</filter-class> <!-- mandatory -->
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AuthFilter</filter-name> <!-- mandatory -->
+		<url-pattern>/auth/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+	</filter-mapping>
+
+
+
+
 </web-app>
