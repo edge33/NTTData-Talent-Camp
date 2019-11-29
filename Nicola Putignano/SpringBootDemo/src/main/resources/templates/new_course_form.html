@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Inserisci Corso</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Inserisci Corso</h1>
+		<br />
+		<form action="#" th:action="@{/courses/save}" th:object="${corsoDiLaurea}"
+			method="post">
+			
+			<table border="0" cellpadding="4">
+				<tr>
+					<td>ID:</td>
+					<td><input type="text" th:field="*{id}" required="required"/></td>
+				</tr>
+				<tr>
+					<td>Dipartimento:</td>
+					<td><input type="text" th:field="*{dipartimento}" required="required"/></td>
+				</tr>
+				<tr>
+					<td>Denominazione:</td>
+					<td><input type="text" th:field="*{denominazione}" required="required" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Salva</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

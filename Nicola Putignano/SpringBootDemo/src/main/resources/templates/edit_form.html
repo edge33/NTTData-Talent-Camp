@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Modifica Studente</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Modifica Studente</h1>
+		<br />
+		<form action="#" th:action="@{/update}" th:object="${studente}"
+			method="post">
+
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>Matricola:</td>
+					<td><input type="text" th:field="*{matricola}" readonly="readonly"/></td>
+				</tr>
+				<tr>
+					<td>CF:</td>
+					<td><input type="text" th:field="*{codiceFiscale}" /></td>
+				</tr>
+				<tr>
+					<td>Nome:</td>
+					<td><input type="text" th:field="*{nome}" /></td>
+				</tr>
+				<tr>
+					<td>Cognome:</td>
+					<td><input type="text" th:field="*{cognome}" /></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" th:field="*{email}" /></td>
+				</tr>
+				<tr>
+					<td>Corso di laurea:</td>
+					<td><input type="text" th:field="*{corsoDiLaurea.denominazione}" /></td>
+				</tr>
+				<tr>
+					<td>Sesso:</td>
+					<td><input type="radio" name="sesso" th:field="*{sesso}"
+						value="M" />M</td>
+					<td><input type="radio" name="sesso" th:field="*{sesso}"
+						value="F" />F</td>
+				</tr>
+				<tr>
+					<td>Localita:</td>
+					<td><input type="text" th:field="*{localita}" /></td>
+				</tr>
+				<tr>
+					<td>Provincia:</td>
+					<td><input type="text" th:field="*{provincia}" /></td>
+				</tr>
+				<tr>
+					<td>Data di nascita:</td>
+					<td><input type="date" th:field="*{dataNascita}"/></td>
+				</tr>
+				<tr>
+					<td>Data di immatricolazione:</td>
+					<td><input type="date" th:field="*{dataImmatricolazione}"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Salva</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

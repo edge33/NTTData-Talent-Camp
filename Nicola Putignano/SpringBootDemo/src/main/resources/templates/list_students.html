@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999.xhtlm"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title alingn="center">Elenco Studenti</title>
+</head>
+<body>
+	<div alingn="center">
+		<h1>Elenco Studenti</h1>
+		<a href="/new">Inserisci Studente</a> <br /> <br />
+		<table border="1" cellpadding="10">
+			<thead>
+				<tr>
+					<th>Matricola</th>
+					<th>CF</th>
+					<th>Nome</th>
+					<th>Cognome</th>
+					<th>Corso di laurea</th>
+					<th>Sesso</th>
+					<th>Località</th>
+					<th>Provincia</th>
+					<th>Azioni</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="studente:${listaStudenti}">
+					<td th:text="${studente.matricola}"></td>
+					<td th:text="${studente.codiceFiscale}"></td>
+					<td th:text="${studente.nome}"></td>
+					<td th:text="${studente.cognome}"></td>
+					<td th:text="${studente.corsoDiLaurea.denominazione}"></td>
+					<td th:text="${studente.sesso}"></td>
+					<td th:text="${studente.localita}"></td>
+					<td th:text="${studente.provincia}"></td>
+					<td>
+						<a th:href="@{'/edit/' + ${studente.matricola}}">Modifica</a>
+						&nbsp;&nbsp;&nbsp; 
+						<a th:href="@{'/delete/' + ${studente.matricola}}">Elimina</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
