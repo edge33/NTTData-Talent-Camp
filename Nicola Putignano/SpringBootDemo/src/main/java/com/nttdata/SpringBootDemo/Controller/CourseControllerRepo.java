@@ -5,13 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nttdata.SpringBootDemo.Services.CorsoServices;
+import com.nttdata.SpringBootDemo.dto.CorsoDiLaureaDto;
 import com.nttdata.SpringBootDemo.model.CorsoDiLaureaEntity;
 
 
@@ -19,49 +21,48 @@ import com.nttdata.SpringBootDemo.model.CorsoDiLaureaEntity;
 @RequestMapping("/")
 public class CourseControllerRepo {
 	
+	private static final String REDIRECT="redirect:/courses";
+	
 	@Autowired
 	private CorsoServices corsoServices;
 	
-	@RequestMapping("/courses")
+	@GetMapping("/courses")
 	public String viewHomePage(Model model) {
-		List<CorsoDiLaureaEntity> listaCorsi = corsoServices.findAll();
+		List<CorsoDiLaureaDto> listaCorsi = corsoServices.findAll();
 		model.addAttribute("listaCorsi", listaCorsi);
 		return "list_courses";
 	}
 	
-	@RequestMapping("/courses/new")
+	@GetMapping("/courses/new")
 	public String showNewForm(Model model) {
 		CorsoDiLaureaEntity corsoDiLaurea = new CorsoDiLaureaEntity();
 		model.addAttribute("corsoDiLaurea", corsoDiLaurea);
 		return "new_course_form";
 	}
-	@RequestMapping(value = "/courses/save", method = RequestMethod.POST)
-	public String save(@ModelAttribute("corsoDiLaurea") CorsoDiLaureaEntity corsoDiLaurea) {
+	@PostMapping(value = "/courses/save")
+	public String save(@ModelAttribute("corsoDiLaurea") CorsoDiLaureaDto corsoDiLaurea) {
 		corsoServices.save(corsoDiLaurea);
-		return "redirect:/courses";
+		return REDIRECT;
 	}
 
-	@RequestMapping("/courses/edit/{id}")
+	@GetMapping("/courses/edit/{id}")
 	public ModelAndView showEditForm(@PathVariable(name = "id") Long id) {
 		ModelAndView mav = new ModelAndView("edit_course_form");
-		CorsoDiLaureaEntity corsoDiLaurea = corsoServices.findById(id);
-//				.orElseThrow(
-//				() -> new IllegalArgumentException("Matricola non valida:" + matricola));
+		CorsoDiLaureaDto corsoDiLaurea = corsoServices.findById(id);
 		mav.addObject("corsoDiLaurea", corsoDiLaurea);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/courses/update", method = RequestMethod.POST)
-	public String update(@ModelAttribute("corso") CorsoDiLaureaEntity corsoDiLaurea) {
-		corsoServices.save(corsoDiLaurea);
-		return "redirect:/courses";
+	@PostMapping(value = "/courses/update")
+	public String update(@ModelAttribute("corso") CorsoDiLaureaDto corsoDiLaurea) {
+		return save(corsoDiLaurea);
 	}
 
-	@RequestMapping("/courses/delete/{id}")
+	@GetMapping("/courses/delete/{id}")
 	public String delete(@PathVariable(name = "id") Long id) {
 		corsoServices.delete(id);
-		return "redirect:/courses";      
+		return REDIRECT;      
 	}
 
 }
